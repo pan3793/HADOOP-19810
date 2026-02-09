@@ -16,7 +16,27 @@ https://github.com/google/guava/commit/b3bb29a54b8f13d6f6630b6cb929867adbf6b9a0
 - Kernel: 6.17.9-76061709-generic
 - OpenJDK Runtime Environment Temurin-25.0.2+10 (build 25.0.2+10-LTS)
 ```
-TODO
+Benchmark                                  (length)  Mode  Cnt  Score   Error  Units
+BytesComparatorBenchmark.diff_last_hadoop       128    ss    3  0.319 ± 0.023   s/op
+BytesComparatorBenchmark.diff_last_hadoop       256    ss    3  0.505 ± 0.008   s/op
+BytesComparatorBenchmark.diff_last_hadoop       512    ss    3  0.879 ± 0.189   s/op
+BytesComparatorBenchmark.diff_last_hadoop      1024    ss    3  1.684 ± 0.141   s/op
+BytesComparatorBenchmark.diff_last_hadoop      2048    ss    3  3.233 ± 0.095   s/op
+BytesComparatorBenchmark.diff_last_jdk          128    ss    3  0.379 ± 0.046   s/op
+BytesComparatorBenchmark.diff_last_jdk          256    ss    3  0.491 ± 0.024   s/op
+BytesComparatorBenchmark.diff_last_jdk          512    ss    3  0.685 ± 0.055   s/op
+BytesComparatorBenchmark.diff_last_jdk         1024    ss    3  1.180 ± 0.052   s/op
+BytesComparatorBenchmark.diff_last_jdk         2048    ss    3  1.929 ± 0.081   s/op
+BytesComparatorBenchmark.equal_hadoop           128    ss    3  0.318 ± 0.052   s/op
+BytesComparatorBenchmark.equal_hadoop           256    ss    3  0.502 ± 0.005   s/op
+BytesComparatorBenchmark.equal_hadoop           512    ss    3  0.957 ± 0.086   s/op
+BytesComparatorBenchmark.equal_hadoop          1024    ss    3  1.696 ± 0.174   s/op
+BytesComparatorBenchmark.equal_hadoop          2048    ss    3  3.216 ± 0.219   s/op
+BytesComparatorBenchmark.equal_jdk              128    ss    3  0.380 ± 0.155   s/op
+BytesComparatorBenchmark.equal_jdk              256    ss    3  0.479 ± 0.053   s/op
+BytesComparatorBenchmark.equal_jdk              512    ss    3  0.741 ± 0.094   s/op
+BytesComparatorBenchmark.equal_jdk             1024    ss    3  1.421 ± 0.187   s/op
+BytesComparatorBenchmark.equal_jdk             2048    ss    3  1.872 ± 0.209   s/op
 ```
 
 - CPU: Apple M1 Max
