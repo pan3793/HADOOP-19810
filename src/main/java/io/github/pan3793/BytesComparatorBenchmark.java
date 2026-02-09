@@ -22,8 +22,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @Fork(1)
 @State(Scope.Benchmark)
-@Warmup(iterations = 3)
-@Measurement(iterations = 5)
+@Warmup(iterations = 2)
+@Measurement(iterations = 3)
 @BenchmarkMode(Mode.SingleShotTime)
 public class BytesComparatorBenchmark {
 
@@ -41,10 +41,11 @@ public class BytesComparatorBenchmark {
     private byte[] ba4;
 
     // 4, 8, 64, 1K, 1M, 1M (unaligned), 64M, 64M (unaligned)
-    @Param({"4", "8", "64", "1024", "1048576", "1048577", "6710884", "6710883"})
+    // @Param({"4", "8", "64", "1024", "1048576", "1048577", "6710884", "6710883"})
+    @Param({"128", "256", "512", "1024", "2048"})
     // @Param({"4", "8", "64", "1024"})
     private int length;
-    private final int NUM = 10000;
+    private final int NUM = 50000000;
 
     @Setup
     public void setup() {
@@ -60,7 +61,7 @@ public class BytesComparatorBenchmark {
     }
 
     @Benchmark
-    public void hadoopEqual() {
+    public void equal_hadoop() {
         for (int i = 0; i < NUM; ++i) {
             if (HadoopBridge.compareTo(ba1, 0, ba1.length, ba2, 0, ba2.length) != 0) {
                 throw new Error(); // deoptimization
@@ -69,7 +70,7 @@ public class BytesComparatorBenchmark {
     }
 
     @Benchmark
-    public void jdkEqual() {
+    public void equal_jdk() {
         for (int i = 0; i < NUM; ++i) {
             if (Arrays.compareUnsigned(ba1, 0, ba1.length, ba2, 0, ba2.length) != 0) {
                 throw new Error(); // deoptimization
@@ -78,7 +79,7 @@ public class BytesComparatorBenchmark {
     }
 
     @Benchmark
-    public void hadoopDiffLast() {
+    public void diff_last_hadoop() {
         for (int i = 0; i < NUM; ++i) {
             if (HadoopBridge.compareTo(ba3, 0, ba3.length, ba4, 0, ba4.length) == 0) {
                 throw new Error(); // deoptimization
@@ -87,7 +88,7 @@ public class BytesComparatorBenchmark {
     }
 
     @Benchmark
-    public void jdkDiffLast() {
+    public void diff_last_jdk() {
         for (int i = 0; i < NUM; ++i) {
             if (Arrays.compareUnsigned(ba3, 0, ba3.length, ba4, 0, ba4.length) == 0) {
                 throw new Error(); // deoptimization
